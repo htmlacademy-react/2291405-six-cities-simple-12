@@ -14,7 +14,7 @@ function CardSortingMenu({onChangeSortType}: CardSortingMenuProps): JSX.Element 
     if (onChangeSortType) {
       onChangeSortType(selectedOption);
     }
-  }, [selectedOption]);
+  }, [onChangeSortType, selectedOption]);
 
   const handleOptionClick = (value: SortTypes) => {
     setSelectedOption(value);
@@ -23,7 +23,7 @@ function CardSortingMenu({onChangeSortType}: CardSortingMenuProps): JSX.Element 
   const placesOptions = Object.values(SortTypes).map((value, index) => (
     <li
       key={`places__option_${index.toString()}`}
-      className="places__option"
+      className={`places__option ${value === selectedOption ? 'places__option--active' : ''}`}
       tabIndex={0}
       onClick={() => handleOptionClick(value)}
     >{value}

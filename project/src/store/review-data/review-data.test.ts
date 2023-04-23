@@ -11,6 +11,7 @@ describe('Reducer: reviewData', () => {
   beforeEach(() => {
     initialState = {
       reviews: [],
+      commentPendingStatus: false,
       hasError: false
     };
   });
@@ -32,16 +33,19 @@ describe('Reducer: reviewData', () => {
   it('should update reviews after send review', () => {
     const modifiedState = getModifiedState(initialState);
     modifiedState.hasError = false;
+    modifiedState.commentPendingStatus = true;
     expect(reviewData.reducer(initialState, {type: sendReviewAction.pending.type}))
       .toEqual(modifiedState);
 
     modifiedState.reviews = fakeReviews;
     modifiedState.hasError = false;
+    modifiedState.commentPendingStatus = false;
     expect(reviewData.reducer(initialState, {type: sendReviewAction.fulfilled.type, payload: fakeReviews}))
       .toEqual(modifiedState);
 
     modifiedState.reviews = [];
     modifiedState.hasError = true;
+    modifiedState.commentPendingStatus = false;
     expect(reviewData.reducer(initialState, {type: sendReviewAction.rejected.type}))
       .toEqual(modifiedState);
   });

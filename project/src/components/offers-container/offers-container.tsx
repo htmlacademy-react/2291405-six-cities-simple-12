@@ -12,7 +12,6 @@ import { setActiveOfferId } from '../../store/app-data/app-data';
 
 
 const getOffersByCity = (city: string, offers: Offer[]) => offers.filter((offer) => offer.city.name === city);
-const getCityForMap = (offer: Offer) => offer.city;
 
 function OffersContainer(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -31,35 +30,32 @@ function OffersContainer(): JSX.Element {
     let cityOffers = getOffersByCity(activeCity, offers);
     cityOffers = getSortedOffers(cityOffers, currentSortType);
     setCurrentOffers(cityOffers);
-  }, [activeCity, dispatch, offers, currentSortType]);
+  }, [dispatch, activeCity, offers, currentSortType]);
 
-  if (Boolean(currentOffers.length) === false) {
-    return (
+  return (
+    (currentOffers.length > 0) ?
+      <div className="cities">
+        <div className="cities__places-container container">
+          <CardList
+            offers={currentOffers}
+            sectionClassName='cities__places'
+            listClassName='cities__places-list'
+            onChangeSelectedCard={handleChangeSelectedCard}
+          >
+            <h2 className="visually-hidden">Places</h2>
+            <b className="places__found">{currentOffers.length} places to stay in {activeCity}</b>
+            <CardSortingMenu onChangeSortType={(sortType) => setCurrentSortType(sortType) }/>
+          </CardList>
+          <div className="cities__right-section">
+            <Map city={currentOffers[0].city} offers={currentOffers} classNameMap={'cities__map map'}/>
+          </div>
+        </div>
+      </div>
+      :
       <NotFoundPage>
         <b className="cities__status">No places to stay available</b>
         <p className="cities__status-description">We could not find any property available at the moment in {activeCity}</p>
       </NotFoundPage>
-    );
-  }
-
-  return (
-    <div className="cities">
-      <div className="cities__places-container container">
-        <CardList
-          offers={currentOffers}
-          sectionClassName='cities__places'
-          listClassName='cities__places-list'
-          onChangeSelectedCard={handleChangeSelectedCard}
-        >
-          <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{currentOffers.length} places to stay in {activeCity}</b>
-          <CardSortingMenu onChangeSortType={(sortType) => setCurrentSortType(sortType) }/>
-        </CardList>
-        <div className="cities__right-section">
-          <Map city={getCityForMap(currentOffers[0])} offers={currentOffers} classNameMap={'cities__map map'}/>
-        </div>
-      </div>
-    </div>
   );
 }
 

@@ -5,7 +5,7 @@ import { ReviewData } from '../../types/review-data';
 import { sendReviewAction } from '../../store/api-actions';
 import Offer from '../../types/offer';
 import { getOffer } from '../../store/app-data/selectors';
-import { getErrorStatus } from '../../store/review-data/selectors';
+import { getCommmentPendingStatus, getErrorStatus } from '../../store/review-data/selectors';
 import {toast} from 'react-toastify';
 
 function ReviewForm(): JSX.Element {
@@ -14,18 +14,17 @@ function ReviewForm(): JSX.Element {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
   const [isSubmitDisabled, setSubmitDisabled] = useState(false);
-  const [isFormEnabled, setFormEnabled] = useState(false);
+
   const hasError = useAppSelector(getErrorStatus);
+  const isCommmentSending = useAppSelector(getCommmentPendingStatus);
 
   const onSubmit = (reviewData: ReviewData) => {
-    setFormEnabled(true);
     dispatch(sendReviewAction(reviewData));
     if (hasError) {
       toast.warn('Send error. Comment not sent!');
     }else{
       clearForm();
     }
-    setFormEnabled(false);
   };
 
   const offer = useAppSelector(getOffer) as Offer;
@@ -75,7 +74,7 @@ function ReviewForm(): JSX.Element {
               id={`${value}-stars`}
               type="radio"
               onChange={() => setRating(value)}
-              disabled={isFormEnabled}
+              disabled={isCommmentSending}
               alt="rating-star"
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
@@ -93,7 +92,7 @@ function ReviewForm(): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={onReviewChangeHandle}
         value={review}
-        disabled={isFormEnabled}
+        disabled={isCommmentSending}
         data-testid="review"
       >
       </textarea>
@@ -101,7 +100,7 @@ function ReviewForm(): JSX.Element {
         <p className="reviews__help">
         To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_CHARACTER_COMMENT} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={isSubmitDisabled || isFormEnabled}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isSubmitDisabled || isCommmentSending}>Submit</button>
       </div>
     </form>
   );

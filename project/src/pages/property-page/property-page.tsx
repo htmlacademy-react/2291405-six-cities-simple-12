@@ -24,10 +24,12 @@ function PropertyPage(): JSX.Element {
   const hasError = useAppSelector(getHasError);
 
   useEffect(() => {
-    dispatch(fetchOfferByIdAction({ id : hotelId }));
-    dispatch(fetchNearOffersAction({ id : hotelId }));
-    dispatch(fetchReviewsAction({ id : hotelId }));
-    dispatch(setActiveOfferId(null));
+    if (!isNaN(hotelId)) {
+      dispatch(fetchOfferByIdAction({ id : hotelId }));
+      dispatch(fetchNearOffersAction({ id : hotelId }));
+      dispatch(fetchReviewsAction({ id : hotelId }));
+      dispatch(setActiveOfferId(null));
+    }
   }, [hotelId, dispatch]);
 
   const currentOffer = useAppSelector(getOffer);

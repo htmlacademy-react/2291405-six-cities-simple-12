@@ -8,7 +8,7 @@ function CityList(): JSX.Element {
   const dispatch = useAppDispatch();
   const activeCity = useAppSelector(getCurrentCity);
 
-  const CityItems = CITIES.map((city) => (
+  const сityItems = CITIES.map((city) => (
     <CityItem
       key={city}
       city={city}
@@ -21,7 +21,7 @@ function CityList(): JSX.Element {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {CityItems}
+          {сityItems}
         </ul>
       </section>
     </div>

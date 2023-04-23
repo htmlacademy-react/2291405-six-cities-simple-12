@@ -21,6 +21,7 @@ export type AppData = {
 
 export type ReviewData = {
   reviews: Review[];
+  commentPendingStatus: boolean;
   hasError: boolean;
 }
 

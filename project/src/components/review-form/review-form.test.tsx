@@ -34,6 +34,7 @@ describe('Component: ReviewForm', () => {
       REVIEW: {
         reviews: [],
         hasError: false,
+        commentPendingStatus: false,
       }
     });
 
@@ -59,6 +60,7 @@ describe('Component: ReviewForm', () => {
       },
       REVIEW: {
         reviews: fakeReviews,
+        commentPendingStatus: false,
         hasError: false,
       }
     });
