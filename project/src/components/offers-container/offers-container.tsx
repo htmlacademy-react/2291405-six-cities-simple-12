@@ -20,7 +20,7 @@ function OffersContainer(): JSX.Element {
   const activeCity = useAppSelector(getCurrentCity);
 
   const [currentOffers, setCurrentOffers] = useState<Offer[]>([]);
-  const [currentSortType, setCurrentSortType] = useState<SortTypes>(SortTypes.DEFAULT);
+  const [currentSortType, setCurrentSortType] = useState<SortTypes>(SortTypes.Default);
 
   const handleChangeSelectedCard = useCallback((cardId: null | number) => {
     dispatch(setActiveOfferId(cardId));
@@ -33,7 +33,7 @@ function OffersContainer(): JSX.Element {
   }, [dispatch, activeCity, offers, currentSortType]);
 
   return (
-    (currentOffers.length > 0) ?
+    (currentOffers.length) ?
       <div className="cities">
         <div className="cities__places-container container">
           <CardList

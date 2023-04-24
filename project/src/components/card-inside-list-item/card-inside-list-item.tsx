@@ -4,7 +4,7 @@ type CardInsideListItemProps = {
 
 function CardInsideListItem({good}: CardInsideListItemProps): JSX.Element {
   return (
-    <li className="property__inside-item" role="listitem">
+    <li className="property__inside-item">
       {good}
     </li>
   );

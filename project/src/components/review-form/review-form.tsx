@@ -1,5 +1,5 @@
 import {ChangeEvent, useState, useEffect, Fragment, FormEvent } from 'react';
-import {MIN_CHARACTER_COMMENT, MAX_CHARACTER_COMMENT, RATING_STARS_COUNT} from '../../const';
+import {CommentСharacteristics, RATING_STARS_COUNT} from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ReviewData } from '../../types/review-data';
 import { sendReviewAction } from '../../store/api-actions';
@@ -38,7 +38,7 @@ function ReviewForm(): JSX.Element {
   };
 
   useEffect(() => {
-    const isDisable = !!(review.length > MAX_CHARACTER_COMMENT || review.length < MIN_CHARACTER_COMMENT || rating === 0);
+    const isDisable = !!(review.length > CommentСharacteristics.MaxCharCount || review.length < CommentСharacteristics.MinCharCount || !rating);
     setSubmitDisabled(isDisable);
   }, [rating, review]);
 
@@ -59,7 +59,7 @@ function ReviewForm(): JSX.Element {
     setSubmitDisabled(false);
   };
 
-  const ratingValues = Array.from({length: RATING_STARS_COUNT}, (_, index) => index + 1);
+  const ratingValues = Array.from({length: RATING_STARS_COUNT}, (_, index) => ++index);
 
   return (
     <form className="reviews__form form" action="" onSubmit={handleSubmit}>
@@ -98,7 +98,7 @@ function ReviewForm(): JSX.Element {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-        To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_CHARACTER_COMMENT} characters</b>.
+        To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{CommentСharacteristics.MinCharCount} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={isSubmitDisabled || isCommmentSending}>Submit</button>
       </div>

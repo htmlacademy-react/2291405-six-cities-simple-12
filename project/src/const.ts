@@ -5,10 +5,10 @@ enum AppRoute {
 }
 
 enum PlaceTypes {
-  apartment = 'Apartment',
-  room = 'Private Room',
-  house = 'House',
-  hotel = 'Hotel',
+  Apartment = 'Apartment',
+  Room = 'Private Room',
+  House = 'House',
+  Hotel = 'Hotel',
 }
 
 enum AuthorizationStatus {
@@ -18,19 +18,26 @@ enum AuthorizationStatus {
 }
 
 enum SortTypes {
-  DEFAULT = 'Popular',
-  PRICE_UP = 'Price: low to high',
-  PRICE_DOWN = 'Price: high to low',
-  RATING = 'Top rated first'
+  Default = 'Popular',
+  PriceUp = 'Price: low to high',
+  PriceDown = 'Price: high to low',
+  Rating = 'Top rated first'
 }
 
-const MIN_CHARACTER_COMMENT = 50;
-const MAX_CHARACTER_COMMENT = 300;
-const RATING_STARS_COUNT = 5;
-const MAX_COUNT_COMMENTS = 10;
+enum CommentСharacteristics {
+  MinCharCount = 50,
+  MaxCharCount = 300,
+}
 
-const URL_MARKER_DEFAULT = '../img/pin.svg';
-const URL_MARKER_CURRENT = '../img/pin-active.svg';
+const RATING_STARS_COUNT = 5;
+
+const MAX_COUNT_COMMENTS = 10;
+const MAX_PHOTOGALLERY_COUNT = 6;
+
+enum MarkerUrls {
+  Default = '../img/pin.svg',
+  Current = '../img/pin-active.svg',
+}
 
 const CITIES = [
   'Paris',
@@ -65,14 +72,13 @@ export {
   AuthorizationStatus,
   SortTypes,
   NameSpace,
+  CommentСharacteristics,
+  MarkerUrls,
   BACKEND_URL,
   REQUEST_TIME,
   AUTH_TOKEN_KEY_NAME,
   CITIES,
-  MIN_CHARACTER_COMMENT,
-  MAX_CHARACTER_COMMENT,
   RATING_STARS_COUNT,
-  URL_MARKER_DEFAULT,
-  URL_MARKER_CURRENT,
-  MAX_COUNT_COMMENTS
+  MAX_COUNT_COMMENTS,
+  MAX_PHOTOGALLERY_COUNT,
 };

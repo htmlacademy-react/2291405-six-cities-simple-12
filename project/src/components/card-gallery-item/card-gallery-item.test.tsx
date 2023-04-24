@@ -7,7 +7,7 @@ describe('Component: CardGalleryItem', () => {
 
   it('should render correctly', () => {
     render(
-      <CardGalleryItem img={image.imageUrl(640, 480, 'nature', true)}/>);
+      <CardGalleryItem imageUrl={image.imageUrl(640, 480, 'nature', true)} offerType={''}/>);
 
     expect(screen.getByRole('img')).toBeInTheDocument();
   });

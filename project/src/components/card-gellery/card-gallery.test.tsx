@@ -7,7 +7,7 @@ describe('Component: CardGallery', () => {
   it('should render correctly', () => {
     const fakeImages = datatype.array(6).map(() => (image.imageUrl(640, 480, 'cat', true)));
     render(
-      <CardGallery images={fakeImages} />
+      <CardGallery images={fakeImages} offerType={''} />
     );
 
     const items = screen.getAllByRole('listitem');

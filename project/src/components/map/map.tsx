@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
+import { MarkerUrls } from '../../const';
 import { FeatureGroup, Icon, Marker } from 'leaflet';
 import City from '../../types/city';
 import Offer from '../../types/offer';
@@ -16,13 +16,13 @@ type MapProps = {
 }
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: MarkerUrls.Default,
   iconSize: [27, 39],
   iconAnchor: [20, 40],
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: MarkerUrls.Current,
   iconSize: [27, 39],
   iconAnchor: [20, 40],
 });
@@ -35,7 +35,7 @@ function Map({city, offers, currentOffer, classNameMap}: MapProps) {
   const [markersGroup] = useState<FeatureGroup>(new FeatureGroup());
 
   useEffect(() => {
-    if (map) {
+    if (map && city) {
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
@@ -59,7 +59,7 @@ function Map({city, offers, currentOffer, classNameMap}: MapProps) {
     }
 
     return () => {markersGroup.clearLayers(); };
-  }, [map, offers, activeCardId, currentOffer]);
+  }, [map, offers, activeCardId, currentOffer, markersGroup, city]);
 
   return (
     <section className={classNameMap} ref={mapRef} data-testid="map"/>

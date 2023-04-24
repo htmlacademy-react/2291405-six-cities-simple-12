@@ -8,7 +8,7 @@ type CardSortingMenuProps = {
 function CardSortingMenu({onChangeSortType}: CardSortingMenuProps): JSX.Element {
   const menuArrowRef = useRef(null);
   const [isOpened, setOpened] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(SortTypes.DEFAULT);
+  const [selectedOption, setSelectedOption] = useState(SortTypes.Default);
 
   useEffect(() => {
     if (onChangeSortType) {

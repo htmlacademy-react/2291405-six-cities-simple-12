@@ -55,7 +55,7 @@ function PropertyPage(): JSX.Element {
     <main className="page__main page__main--property">
       <section className="property">
         <div className="property__gallery-container container">
-          <CardGallery images={currentOffer.images}/>
+          <CardGallery images={currentOffer.images} offerType={currentOffer.type}/>
         </div>
         <div className="property__container container">
           <div className="property__wrapper">
